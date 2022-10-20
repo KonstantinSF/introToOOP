@@ -2,8 +2,6 @@
 using namespace std; 
 #define tab "\t"
 
-
-//создавая класс или структура
 class Point
 {
 	double x; //это переменные члены класса (позволяют отличить один объект от другого)
@@ -54,19 +52,19 @@ public:
 	{
 		cout << "X=" << x << "\tY="<< y << endl; 
 	}
-	double Distance_btw_point(double x2, double y2)
+	double Distance_btw_points(double x2, double y2)const//передаем переменные
 	{
 		double result_distance;
 		result_distance = sqrt(pow((x2 - this->x), 2) + pow((y2 - this->y), 2));
 		return result_distance;
 	}
-	double Distance_btw_point(Point point) 
+	double Distance_btw_points(Point point)const//передаем другой Объект в метод этой точки
 	{
 		double result_distance;
 		result_distance = sqrt(pow((point.get_x() - this->x), 2) + pow((point.get_y() - this->y), 2));
 		return result_distance;
 	}
-};
+};//создавая класс или структура
 
 double Distance_btwn_points(double x1, double y1, double x2, double y2);
 
@@ -111,8 +109,8 @@ void main()
 	//Point C(2, 3); //full argument constructor
 	//C.print(); 
 
-	cout << "Расстояние (от точки А)  до точки В (через передачу параметров) = "<<A.Distance_btw_point(B.get_x(), B.get_y()) << endl;
-	cout << "Расстояние (от точки А)  до точки В (через передачу объекта) = "<<A.Distance_btw_point(B) << endl;
+	cout << "Расстояние (от точки А)  до точки В (через передачу параметров) = "<<A.Distance_btw_points(B.get_x(), B.get_y()) << endl;
+	cout << "Расстояние (от точки А)  до точки В (через передачу объекта) = "<<A.Distance_btw_points(B) << endl;
 	cout << "Расстояние (от точки А)  до точки В (через функцию) = "<< Distance_btwn_points(A.get_x(), A.get_y(), B.get_x(), B.get_y()) << endl;
 	
 	/*double x1, x2, y1, y2; 
