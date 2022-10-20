@@ -60,9 +60,15 @@ public:
 		result_distance = sqrt(pow((x2 - this->x), 2) + pow((y2 - this->y), 2));
 		return result_distance;
 	}
+	double Distance_btw_point(Point point) 
+	{
+		double result_distance;
+		result_distance = sqrt(pow((point.get_x() - this->x), 2) + pow((point.get_y() - this->y), 2));
+		return result_distance;
+	}
 };
 
-float Distance_btwn_points(float x1, float y1, float x2, float y2); 
+double Distance_btwn_points(double x1, double y1, double x2, double y2);
 
 //#define STRUCT_POINT
 //#define GET_SET
@@ -94,21 +100,22 @@ void main()
 	cout << "Введите координаты точки А X1= "; cin >> x1;
 	cout << "Введите координаты точки А Y2= "; cin >> y1;
 	Point A (x1, y1);
-	A.print();
+	//A.print();
 
 	float x2, y2; 
 	cout << "Введите координаты второй точки X2= "; cin >> x2;
 	cout << "Введите координаты второй точки Y2= "; cin >> y2;
 	Point B (x2, y2); 
-	B.print(); 
+	//B.print(); 
 
 	//Point C(2, 3); //full argument constructor
 	//C.print(); 
 
-	cout << "Расстояние (от точки А)  до точки В = "<<A.Distance_btw_point(B.get_x(), B.get_y()) << endl;
+	cout << "Расстояние (от точки А)  до точки В (через передачу параметров) = "<<A.Distance_btw_point(B.get_x(), B.get_y()) << endl;
+	cout << "Расстояние (от точки А)  до точки В (через передачу объекта) = "<<A.Distance_btw_point(B) << endl;
+	cout << "Расстояние (от точки А)  до точки В (через функцию) = "<< Distance_btwn_points(A.get_x(), A.get_y(), B.get_x(), B.get_y()) << endl;
 	
-
-	/*float x1, x2, y1, y2; 
+	/*double x1, x2, y1, y2; 
 	cout << "Введите координаты первой точки X1= "; cin >> x1;
 	cout << "Введите координаты первой точки Y1= "; cin >> y1;
 	cout << "Введите координаты второй точки X2= "; cin >> x2;
@@ -116,9 +123,9 @@ void main()
 	cout << "Расстояние между точками = " << Distance_btwn_points(x1, y1, x2, y2) << endl;*/ 
 }
 
-float Distance_btwn_points(float x1, float y1, float x2, float y2)
+double Distance_btwn_points(double x1, double y1, double x2, double y2)
 {
-	float result_distance; 
+	double result_distance;
 	
 	result_distance = sqrt(pow((x2 - x1), 2) + pow((y2 - y1), 2));
 	return result_distance; 
