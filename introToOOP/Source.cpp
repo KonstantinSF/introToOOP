@@ -29,24 +29,24 @@ public:
 	Point()
 	{
 		x = y = double(); //значение по умолчанию для double
-		cout << "Constructor:\t" << this << endl; 
+		//cout << "Constructor:\t" << this << endl; 
 	}
 	
 	Point(double x)
 	{
 		this->x = x; 
 		this->y = 0; 
-		cout << "1ArgConstructor:" << this << endl; 
+		//cout << "1ArgConstructor:" << this << endl; 
 	}
 	Point (double x, double y)
 	{
 		this->x = x; 
 		this->y= y; 
-		cout << "Constructor:\t" << this << endl; 
+		//cout << "Constructor:\t" << this << endl; 
 	}
 	~Point()
 	{
-		cout << "Destructor:\t" << this << endl;
+		//cout << "Destructor:\t" << this << endl;
 	}
 	
 	//			Methods
@@ -54,7 +54,7 @@ public:
 	{
 		cout << "X=" << x << "\tY="<< y << endl; 
 	}
-	double Distance_btw_point(double x, double y, double x2, double y2)
+	double Distance_btw_point(double x2, double y2)
 	{
 		double result_distance;
 		result_distance = sqrt(pow((x2 - this->x), 2) + pow((y2 - this->y), 2));
@@ -102,10 +102,10 @@ void main()
 	Point B (x2, y2); 
 	B.print(); 
 
-	Point C(2, 3); //full argument constructor
-	C.print(); 
+	//Point C(2, 3); //full argument constructor
+	//C.print(); 
 
-	cout << "Расстояние (от точки А)  до точки В = "<<A.Distance_btw_point(A.get_x(), A.get_y(), B.get_x(), B.get_y()) << endl;
+	cout << "Расстояние (от точки А)  до точки В = "<<A.Distance_btw_point(B.get_x(), B.get_y()) << endl;
 	
 
 	/*float x1, x2, y1, y2; 
