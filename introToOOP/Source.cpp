@@ -1,130 +1,227 @@
 ﻿#include<iostream>
-using namespace std; 
+using namespace std;
+using std::cin;
+using std::cout;
+using std::endl;
+
 #define tab "\t"
+#define delimiter "\n---------------------------------------------------\n"
+
+//Создавая класс или структуру мы создаем новый тип данных,
+//следовательно, объекты (экземпляры) нашего класса или структуры являются
+//самыми обычными переменными.
+
+//				КЛАСС		-	ЭТО ТИП ДАННЫХ
+//				СТРУКТУРА	-	ЭТО ТИП ДАННЫХ
 
 class Point
 {
-	double x; //это переменные члены класса (позволяют отличить один объект от другого)
-	double y; //это поля структоры
+	double x;
+	double y;
 public:
 	double get_x()const
 	{
-		return x; 
+		return x;
 	}
 	double get_y()const
 	{
-		return y; 
+		return y;
 	}
 	void set_x(double x)
 	{
-		this->x = x; 
+		this->x = x;
 	}
 	void set_y(double y)
 	{
 		this->y = y;
 	}
-	//			Constructors:
-	Point()
+
+	//				Constructors:
+	/*Point()
 	{
-		x = y = double(); //значение по умолчанию для double
-		//cout << "Constructor:\t" << this << endl; 
+		x = y = double();
+		//double() - значение по умолчанию для типа double
+		cout << "DefaultConstructor:\t" << this << endl;
+	}*/
+	/*Point(double x)
+	{
+		this->x = x;
+		this->y = 0;
+		cout << "1ArgConstructor:" << this << endl;
+	}*/
+	Point(double x = 0, double y = 0)
+	{
+		this->x = x;
+		this->y = y;
+		cout << "Constructor:\t" << this << endl;
 	}
-	
-	Point(double x)
+	Point(const Point& other)
 	{
-		this->x = x; 
-		this->y = 0; 
-		//cout << "1ArgConstructor:" << this << endl; 
-	}
-	Point (double x, double y)
-	{
-		this->x = x; 
-		this->y= y; 
-		//cout << "Constructor:\t" << this << endl; 
+		this->x = other.x;
+		this->y = other.y;
+		cout << "CopyConstructor:" << this << endl;
 	}
 	~Point()
 	{
-		//cout << "Destructor:\t" << this << endl;
+		cout << "Destructor:\t" << this << endl;
 	}
-	
-	//			Methods
+	//				Operator:
+	Point& operator =(const Point& other)
+	{
+		this->x = other.x; 
+		this->y = other.y; 
+		cout << "Copy.Assignment:\t" << this << endl; 
+		return *this; 
+	}
+	//				Methods:
+	double distance(const Point& other)const
+	{
+		/*double x_distance = this->x - other.x;
+		double y_distance = this->y - other.y;
+		double distance = sqrt(x_distance * x_distance + y_distance * y_distance);
+		return distance;*/
+		return sqrt(pow(this->x - other.x, 2) + pow(this->y - other.y, 2));
+	}
 	void print()const
 	{
-		cout << "X=" << x << "\tY="<< y << endl; 
+		cout << "X = " << x << "\tY = " << y << endl;
 	}
-	double Distance_btw_points(double x2, double y2)const//передаем переменные
-	{
-		double result_distance;
-		result_distance = sqrt(pow((x2 - this->x), 2) + pow((y2 - this->y), 2));
-		return result_distance;
-	}
-	double Distance_btw_points(Point point)const//передаем другой Объект в метод этой точки
-	{
-		double result_distance;
-		result_distance = sqrt(pow((point.get_x() - this->x), 2) + pow((point.get_y() - this->y), 2));
-		return result_distance;
-	}
-};//создавая класс или структура
+};
 
-double Distance_btwn_points(double x1, double y1, double x2, double y2);
+double distance(const Point& A, const Point& B)
+{
+	/*double x_distance = A.get_x() - B.get_x();
+	double y_distance = A.get_y() - B.get_y();
+	double distance = sqrt(x_distance * x_distance + y_distance * y_distance);
+	return distance;*/
+	return sqrt(pow(A.get_x() - B.get_x(), 2) + pow(A.get_y() - B.get_y(), 2));
+}
 
 //#define STRUCT_POINT
-//#define GET_SET
+//#define GET_SET_CHECK
+//#define DISTANCE_CHECK
+//#define CONSTRUCTORS_CHECK
 
 void main()
 {
 	setlocale(LC_ALL, "");
-	cout << "Hello OOP" << endl; 
+	//cout << "Hello OOP" << endl;
 
 #ifdef STRUCT_POINT
-	int a;// объявление переменной а типа инт
-	Point A; //объявление или создание переменной А, типа Point
-			//объявление объекта А структоры Point
+	//type name;
+	int a;		//Объявление переменной 'a' типа 'int'
+	Point A;	//Объявление переменной 'A' типа 'Point'
+				//Объявление объекта 'A' структуры 'Point'
+				//Объявление экземпляра 'A' структуры 'Point'
 	A.x = 2.2;
 	A.y = 3.4;
-	//объявление экземпляра А структуры Point
 	cout << A.x << tab << A.y << endl;
-	Point* pA = &A; //указатель на А
+
+	Point* pA = &A;
 	cout << pA->x << tab << pA->y << endl;
 #endif // STRUCT_POINT
 
-#ifdef GET_SET
+#ifdef GET_SET_CHECK
 	Point A;
 	A.set_x(2);
 	A.set_y(3);
+	//cout << A.get_x() << tab << A.get_y() << endl;
 	A.print();
-#endif // GET_SET
-	double x1, y1; 
-	cout << "Введите координаты точки А X1= "; cin >> x1;
-	cout << "Введите координаты точки А Y2= "; cin >> y1;
-	Point A (x1, y1);
-	//A.print();
 
-	float x2, y2; 
-	cout << "Введите координаты второй точки X2= "; cin >> x2;
-	cout << "Введите координаты второй точки Y2= "; cin >> y2;
-	Point B (x2, y2); 
-	//B.print(); 
+	Point B;
+	B.set_x(5);
+	B.set_y(7);
+	//cout << B.get_x() << tab << B.get_y() << endl;
+	B.print();
 
-	//Point C(2, 3); //full argument constructor
-	//C.print(); 
+	for (int i = 0; i < 10; i++)
+	{
+		cout << i << tab;
+	}
+	cout << endl;
+#endif // GET_SET_CHECK
 
-	cout << "Расстояние (от точки А)  до точки В (через передачу параметров) = "<<A.Distance_btw_points(B.get_x(), B.get_y()) << endl;
-	cout << "Расстояние (от точки А)  до точки В (через передачу объекта) = "<<A.Distance_btw_points(B) << endl;
-	cout << "Расстояние (от точки А)  до точки В (через функцию) = "<< Distance_btwn_points(A.get_x(), A.get_y(), B.get_x(), B.get_y()) << endl;
-	
-	/*double x1, x2, y1, y2; 
-	cout << "Введите координаты первой точки X1= "; cin >> x1;
-	cout << "Введите координаты первой точки Y1= "; cin >> y1;
-	cout << "Введите координаты второй точки X2= "; cin >> x2;
-	cout << "Введите координаты второй точки Y2= "; cin >> y2;
-	cout << "Расстояние между точками = " << Distance_btwn_points(x1, y1, x2, y2) << endl;*/ 
+#ifdef DISTANCE_CHECK
+	Point A(2, 3);
+	Point B(7, 8);
+	A.print();
+	B.print();
+	cout << delimiter << endl;
+	cout << "Расстояние от точки 'A' до точки 'B': " << A.distance(B) << endl;
+	cout << delimiter << endl;
+	cout << "Расстояние от точки 'B' до точки 'A': " << B.distance(A) << endl;
+	cout << delimiter << endl;
+	cout << "Расстояние между точками 'A' и 'B': " << distance(A, B) << endl;
+	cout << delimiter << endl;
+	cout << "Расстояние между точками 'B' и 'A': " << distance(B, A) << endl;
+	cout << delimiter << endl;
+#endif // DISTANCE_CHECK
+
+
+#ifdef CONSTRUCTORS_CHECK
+	Point A;	//Default constructor
+	A.print();
+
+	Point B = 5;//Single-Argument constructor
+	B.print();
+
+	Point C(2, 3);
+	C.print();
+
+	Point D = C;	//CopyConstructor
+	D.print();
+	Point E; //Default constructor
+	E = D; // Assignment operator (COPY Assignment)
+	E.print(); 
+#endif // CONSTRUCTORS_CHECK
+	Point A, B, C; 
+	cout << delimiter << endl; 
+	A = B = C = Point(2, 3); 
+	cout << delimiter << endl; 
 }
 
-double Distance_btwn_points(double x1, double y1, double x2, double y2)
-{
-	double result_distance;
-	
-	result_distance = sqrt(pow((x2 - x1), 2) + pow((y2 - y1), 2));
-	return result_distance; 
-}
+/*
+-----------------------------------------------------------
+.  - Оператор прямого доступа (Point operator)
+-> - Оператор косвенного доступа (Arrow operator)
+-----------------------------------------------------------
+*/
+
+/*
+-----------------------------------------------------------
+1. Encapsulation - это сокрытие определенной части класса от внешнего мира;
+2. Inheritance;
+3. Polymorphism;
+Модификаторы доступа:
+private:	закрытые поля, доступные только внутри класса.
+public:		открытые поля, доступные из любого места программы.
+protected:	защищенные поля
+get/set-методами
+get (взять, получить)	- используются для доступа к переменным членам класса на чтение,
+						  т.е., позволяют получить (взять) значение закрытой переменной.
+set (задать, установить)- используются для доступа к переменным членам класса на запись,
+						  т.е., позволяют задать значение закрытой переменной в классе.
+						  Кроме того, set-методы обеспечивают фильтрацию данных, т.е.,
+						  защищают переменные члены класса от записи в них некорректных
+						  значений.
+-----------------------------------------------------------
+*/
+
+/*
+-----------------------------------------------------------
+					SPECIAL MEMBERS
+1. Constructor - это метод, который создает объект;
+					-с параметрами;
+					-без параметров;
+					-по умолчанию (default constructor);
+					-конструктор копирования;
+					-конструктор переноса;
+	Конструктор по умолчанию (Default constructor) - это конструктор, который может быть вызван без параметров.
+2. Destructor  - это метод, который уничтожает объект по завершении его времени жизни.
+				 Время жизни объекта завршается при выходе за пределы области видимости,
+				 в которой он объявлен.
+				 ~
+				 void
+3. Assignment operator;
+-----------------------------------------------------------
+*/
