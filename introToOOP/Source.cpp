@@ -77,6 +77,19 @@ public:
 		cout << "Copy.Assignment:\t" << this << endl; 
 		return *this; 
 	}
+	Point& operator++()//prefix increment
+	{
+		x++; 
+		y++;
+		return *this; 
+	 }
+	Point operator++(int/*здесь возможен только ИНТ! Всегда!*/)
+	{
+		Point old = *this; 
+		x++; 
+		y++; 
+		return old; 
+	}
 	//				Methods:
 	double distance(const Point& other)const
 	{
@@ -100,7 +113,7 @@ double distance(const Point& A, const Point& B)
 	return distance;*/
 	return sqrt(pow(A.get_x() - B.get_x(), 2) + pow(A.get_y() - B.get_y(), 2));
 }
-Point operator + (const Point& left, const Point& right)
+Point operator + (const Point& left, const Point& right)//локальный объект никогда не возвращаем по ССЫЛКЕ, только по значению!
 {
 	Point res; 
 	res.set_x(left.get_x() + right.get_x()); 
@@ -188,6 +201,7 @@ void main()
 	A = B = C = Point(2, 3);
 	cout << delimiter << endl;
 #endif // ASSIGNMENT_OPERATOR_CHECK
+	
 	int a = 2; 
 	int b = 3; 
 	int c = a + b; 
@@ -197,6 +211,13 @@ void main()
 	A.print(); 
 	B.print(); 
 	C.print(); 
+	Point D = C++;
+	C.print(); 
+	D.print(); 
+	for (Point i;  i.get_x() < 10; ++i)
+	{
+		i.print(); 
+	}
 }
 
 /*
