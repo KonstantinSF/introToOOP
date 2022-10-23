@@ -6,7 +6,11 @@ using std::endl;
 
 #define tab "\t"
 #define delimiter "\n---------------------------------------------------\n"
-
+//#define STRUCT_POINT
+//#define GET_SET_CHECK
+//#define DISTANCE_CHECK
+//#define CONSTRUCTORS_CHECK
+//#define ASSIGNMENT_OPERATOR_CHECK
 //Создавая класс или структуру мы создаем новый тип данных,
 //следовательно, объекты (экземпляры) нашего класса или структуры являются
 //самыми обычными переменными.
@@ -55,7 +59,7 @@ public:
 		this->y = y;
 		cout << "Constructor:\t" << this << endl;
 	}
-	Point(const Point& other)
+	Point(const Point& other)//оператор копирования
 	{
 		this->x = other.x;
 		this->y = other.y;
@@ -66,7 +70,7 @@ public:
 		cout << "Destructor:\t" << this << endl;
 	}
 	//				Operator:
-	Point& operator =(const Point& other)
+	Point& operator =(const Point& other)//оператор присваивания
 	{
 		this->x = other.x; 
 		this->y = other.y; 
@@ -96,11 +100,13 @@ double distance(const Point& A, const Point& B)
 	return distance;*/
 	return sqrt(pow(A.get_x() - B.get_x(), 2) + pow(A.get_y() - B.get_y(), 2));
 }
-
-//#define STRUCT_POINT
-//#define GET_SET_CHECK
-//#define DISTANCE_CHECK
-//#define CONSTRUCTORS_CHECK
+Point operator + (const Point& left, const Point& right)
+{
+	Point res; 
+	res.set_x(left.get_x() + right.get_x()); 
+	res.set_y(left.get_y() + right.get_y()); 
+	return res; 
+}
 
 void main()
 {
@@ -174,10 +180,23 @@ void main()
 	E = D; // Assignment operator (COPY Assignment)
 	E.print(); 
 #endif // CONSTRUCTORS_CHECK
-	Point A, B, C; 
-	cout << delimiter << endl; 
-	A = B = C = Point(2, 3); 
-	cout << delimiter << endl; 
+#ifdef ASSIGNMENT_OPERATOR_CHECK
+	int a, b, c;
+	a = b = c = 0;
+	Point A, B, C;
+	cout << delimiter << endl;
+	A = B = C = Point(2, 3);
+	cout << delimiter << endl;
+#endif // ASSIGNMENT_OPERATOR_CHECK
+	int a = 2; 
+	int b = 3; 
+	int c = a + b; 
+	Point A(2, 3);
+	Point B(7, 8);
+	Point C = A + B ; //оператор не знает что делать с типом данных Point
+	A.print(); 
+	B.print(); 
+	C.print(); 
 }
 
 /*
