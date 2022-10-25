@@ -4,7 +4,7 @@ using namespace std;
 
 #define COPY_CHECK
 
-int Minimal_common_divider(int a, int b); //Copyright By EVKLID
+int Maximal_common_divider(int a, int b); //Copyright By EVKLID
 
 class Fraction
 {
@@ -150,7 +150,7 @@ void main()
 	D = A / C; 
 	D.Print(); */
 }
-int Minimal_common_divider(int a, int b)
+int Maximal_common_divider(int a, int b)
 {
 	for (; ;)
 	{
