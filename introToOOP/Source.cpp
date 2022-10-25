@@ -154,7 +154,7 @@ ostream& operator<<(ostream& os, const Point& obj)
 {
 	os << "X= " << obj.get_x();
 	os << "\tY= " << obj.get_y(); 
-	return os; 
+	return os;
 }
 
 void main()
