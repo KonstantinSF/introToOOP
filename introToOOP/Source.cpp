@@ -98,7 +98,7 @@ public:
 	{
 		set_x(x); 
 		set_y(y); 
-		return *this; 
+		return *this;
 	}
 	//				Methods:
 	double distance(const Point& other)const

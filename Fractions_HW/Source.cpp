@@ -97,12 +97,23 @@ public:
 		return *this; 
 	}
 };
-
+Fraction operator*(const Fraction& left,  const Fraction& right)
+{
+	Fraction Left = left; 
+	Fraction Right = right; 
+	Left.Integer_to_numerator();
+	Right.Integer_to_numerator();
+	Fraction result;
+	result.set_numerator(Left.get_numerator() * Right.get_numerator());
+	result.set_denominator(Left.get_denominator() * Right.get_denominator());
+	result.Integer_extractor();
+	return result;
+}
 void main()
 {
 	setlocale(LC_ALL, ""); 
 
-	Fraction A(0, 15155, 1516555);
+	Fraction A(1, 2, 3);
 	A.Print();
 
 #ifdef COPY_CHECK
@@ -118,6 +129,13 @@ void main()
 	cout << Minimal_common_divider(11, 3) << endl; */
 	/*C.Inverse(); 
 	C.Print(); */
+	/*Fraction D; 
+	D = C; 
+	D.Print(); */
+	Fraction D; 
+	D = A * C; 
+	D.Print(); 
+
 
 }
 int Minimal_common_divider(int a, int b)
