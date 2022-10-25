@@ -60,7 +60,7 @@ public:
 	{
 		if (integer != 0 && numerator != denominator)cout << get_integer() << " " << get_numerator() << "/" << get_denominator() << endl;
 		else if (numerator == denominator) cout << get_integer() << endl; 
-		else cout << get_numerator() << "/" << get_denominator() << endl;;
+		else if (integer==0) cout << get_numerator() << "/" << get_denominator() << endl;;
 	}
 	void Integer_to_numerator()
 	{
@@ -111,19 +111,20 @@ Fraction operator*(const Fraction& left,  const Fraction& right)
 	result.Integer_extractor();
 	return result;
 }
-//Fraction operator/(const Fraction& left, const Fraction& right)
-//{
-//	Fraction Left = left;
-//	Fraction Right = right;
-//	Left.Integer_to_numerator();
-//	Right.Integer_to_numerator();
-//	Right.Inverse();
-//	Fraction result;
-//	result.set_numerator(Left.get_numerator() * Right.get_numerator());
-//	result.set_denominator(Left.get_denominator() * Right.get_denominator());
-//	//result.Integer_extractor();
-//	return result;
-//}
+Fraction operator/(const Fraction& left, const Fraction& right)
+{
+	Fraction Left = left;
+	Fraction Right = right;
+	Left.Integer_to_numerator();
+	Right.Integer_to_numerator();
+	Right.Inverse();
+	Fraction result;
+	result.set_numerator(Left.get_numerator() * Right.get_numerator());
+	result.set_denominator(Left.get_denominator() * Right.get_denominator());
+	result.Reduction(); 
+	result.Integer_extractor();
+	return result;
+}
 
 void main()
 {
@@ -146,10 +147,8 @@ void main()
 	/*C.Inverse(); 
 	C.Print(); */
 	/*Fraction D; 
-	D = C; 
+	D = A / C; 
 	D.Print(); */
-
-
 }
 int Minimal_common_divider(int a, int b)
 {
