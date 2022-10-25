@@ -37,7 +37,7 @@ public:
 		return denominator; 
 	}
 	//				CONSTRUCTORS
-	Fraction(int integer = 0, int numerator = 0, int denominator = 0)
+	Fraction(int integer = 0, int numerator = 0, int denominator = 1)
 	{
 		this->integer = integer; 
 		this->numerator = numerator; 
@@ -77,7 +77,7 @@ public:
 	}
 	void Reduction()
 	{
-		int divider = Minimal_common_divider(this->numerator, this->denominator); 
+		int divider = Maximal_common_divider(this->numerator, this->denominator); 
 		this->numerator = numerator / divider; 
 		this->denominator = denominator / divider; 
 	}
@@ -146,9 +146,9 @@ void main()
 	cout << Minimal_common_divider(11, 3) << endl; */
 	/*C.Inverse(); 
 	C.Print(); */
-	/*Fraction D; 
+	Fraction D; 
 	D = A / C; 
-	D.Print(); */
+	D.Print(); 
 }
 int Maximal_common_divider(int a, int b)
 {
